@@ -1,0 +1,9 @@
+body{
+    background-image: url("../images/Marvel.jpg");
+    background-size: cover;
+}
+
+h1{
+    color: whitesmoke;
+    text-align: center;
+}

@@ -29,7 +29,7 @@ $(document).ready(function () {
         if (heroCharacter != null && villainCharacter != null) {
             attack();
             $("#fight").text(heroCharacter.name + " attacked " + villainCharacter.name + " with " + heroCharacter.currentAttackPower + " power.")
-            $("#counter-death").text(villainCharacter.name + " countered attacked " + heroCharacter.name + " with " + villainCharacter.counterAttackPower + " power.")
+            $("#counter-death").text(villainCharacter.name + " counter attacked " + heroCharacter.name + " with " + villainCharacter.counterAttackPower + " power.")
         }
     });
 });

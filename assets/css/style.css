@@ -38,6 +38,7 @@ h1, h2{
 }
 #fight, #counter-death{
         text-align: center;
-        color: whitesmoke;
+        color: black;
         font-weight: bolder;
+        font-size: 28px;
 }

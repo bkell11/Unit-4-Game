@@ -22,20 +22,30 @@ var villainCharacter;
 var gameOver = false;
 
 $(document).ready(function () {
+    getHeros();
+    $("#reset").hide();
+    // create new function to call on ready and reset..
+    $("#attack").on("click", function () {
+        if (heroCharacter != null && villainCharacter != null) {
+            attack();
+            $("#fight").text(heroCharacter.name + " attacked " + villainCharacter.name + " with " + heroCharacter.currentAttackPower + " power.")
+            $("#counter-death").text(villainCharacter.name + " countered attacked " + heroCharacter.name + " with " + villainCharacter.counterAttackPower + " power.")
+        }
+    });
+});
+
+function getHeros() {
     var heroSelections = $("#hero-selection");
 
     for (var i = 0; i < Characters.length; i++) {
 
-        var characterDiv = $("<div id=\"" + Characters[i].id + "\" style=\"background-color:pink; height: 200px; width: 200px; text-align: center; display: inline-block;\"><p>" + Characters[i].name + "</p><img src=\"" + Characters[i].image + "\" alt=\"" + Characters[i].name + "\" style=\"max-width: 80%;\"><p id=\"" + Characters[i].id + "HP" + "\">HP: " + Characters[i].hp + "</p></div>");
+        var characterDiv = $("<div id=\"" + Characters[i].id + "\"><p>" + Characters[i].name + "</p><img src=\"" + Characters[i].image + "\" alt=\"" + Characters[i].name + "\" style=\"max-width: 80%; height: 100px;\"><p id=\"" + Characters[i].id + "HP" + "\">HP: " + Characters[i].hp + "</p></div>");
         characterDiv.on("click", i, onCharacterClick);
         heroSelections.append(characterDiv);
 
     }
-    // create new function to call on ready and reset..
-    $("#attack").on("click", function () {
-        attack();
-    });
-});
+};
+
 function onCharacterClick(event) {
     if (gameOver)
         return;
@@ -86,13 +96,13 @@ function attack() {
         $("#" + heroCharacter.id + "HP").html("HP: " + heroCharacter.hp);
         if (heroDied) {
             $("#" + heroCharacter.id).remove();
+            heroCharacter = null;
             gameOver = true;
         }
     }
-
-
-
 }
+
+
 function Character(id, name, image, hp, baseAttackPower, counterAttackPower) {
     this.id = id;
     this.name = name;
@@ -125,6 +135,10 @@ function Character(id, name, image, hp, baseAttackPower, counterAttackPower) {
     };
 
 }
+
+// $("#fight").text(heroCharacter.name + " attacked " + villainCharacter.name + " with " + heroCharacter.currentAttackPower + " power.")
+// $("#counter-death").text(villainCharacter.name + " countered attacked " + heroCharacter.name + " with " + villainCharacter.counterAttackPower + " power.")
+// $("#counter-death").text(villainCharacter.name + " has died.")
 
 // Write out who is inflicting what damage..
 // Game over writing & a reset button..

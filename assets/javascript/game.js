@@ -128,7 +128,7 @@ function restartGame() {
     villainsDied = 0;
     Characters = [new Character("thor", "Thor", "assets/images/Thor.jpg", 785, 20, 40), new Character("iron-man", "Iron Man", "assets/images/Iron_Man.jpg", 810, 15, 60), new Character("thanos", "Thanos", "assets/images/Thanos.jpg", 950, 10, 70), new Character("loki", "Loki", "assets/images/Loki.png", 725, 20, 30),];
     $("#reset").hide();
-
+    $("#counter-death").empty();
     for (var i = 0; i < Characters.length; i++) {
 
         var characterDiv = $("#" + Characters[i].id);

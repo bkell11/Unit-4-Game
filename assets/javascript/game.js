@@ -28,18 +28,18 @@ $(document).ready(function () {
     $("#attack").on("click", function () {
         if (heroCharacter != null && villainCharacter != null) {
             attack();
-            $("#fight").text(heroCharacter.name + " attacked " + villainCharacter.name + " with " + heroCharacter.currentAttackPower + " power.")
-            $("#counter-death").text(villainCharacter.name + " counter attacked " + heroCharacter.name + " with " + villainCharacter.counterAttackPower + " power.")
+
         }
     });
 });
+
 
 function getHeros() {
     var heroSelections = $("#hero-selection");
 
     for (var i = 0; i < Characters.length; i++) {
 
-        var characterDiv = $("<div id=\"" + Characters[i].id + "\"><p>" + Characters[i].name + "</p><img src=\"" + Characters[i].image + "\" alt=\"" + Characters[i].name + "\" style=\"max-width: 80%; height: 100px;\"><p id=\"" + Characters[i].id + "HP" + "\">HP: " + Characters[i].hp + "</p></div>");
+        var characterDiv = $("<div id=\"" + Characters[i].id + "\"><h3>" + Characters[i].name + "</h3><img src=\"" + Characters[i].image + "\" alt=\"" + Characters[i].name + "\" style=\"max-width: 80%; height: 100px;\"><p id=\"" + Characters[i].id + "HP" + "\">HP: " + Characters[i].hp + "</p></div>");
         characterDiv.on("click", i, onCharacterClick);
         heroSelections.append(characterDiv);
 
@@ -79,6 +79,8 @@ function attack() {
     if (heroCharacter == null || villainCharacter == null || gameOver) {
         return;
     }
+    var enemy = $("#enemy");
+    var vSelection = $("#villain-selection");
     var heroDamage = heroCharacter.calculateCurrentDamage();
     var villainDamage = villainCharacter.counterAttackPower;
     villainCharacter.procureDamage(heroDamage);
@@ -87,6 +89,8 @@ function attack() {
     $("#" + villainCharacter.id + "HP").html("HP: " + villainCharacter.hp);
     if (villainDied) {
         $("#" + villainCharacter.id).remove();
+        $("#fight").text("");
+        $("#counter-death").text(heroCharacter.name + " has defeated " + villainCharacter.name + "! Choose another enemy!");
         villainCharacter = null;
     }
 
@@ -94,10 +98,15 @@ function attack() {
         heroCharacter.procureDamage(villainDamage);
         heroDied = heroCharacter.isDead();
         $("#" + heroCharacter.id + "HP").html("HP: " + heroCharacter.hp);
+        $("#fight").text(heroCharacter.name + " attacked " + villainCharacter.name + " with " + heroCharacter.currentAttackPower + " power.")
+        $("#counter-death").text(villainCharacter.name + " countered attacked " + heroCharacter.name + " with " + villainCharacter.counterAttackPower + " power.")
         if (heroDied) {
             $("#" + heroCharacter.id).remove();
+            $("#fight").text("");
+            $("#counter-death").text(villainCharacter.name + " has defeated " + heroCharacter.name + "! Game Over! Try again.");
             heroCharacter = null;
             gameOver = true;
+            $("#reset").show();
         }
     }
 }

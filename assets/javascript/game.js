@@ -16,7 +16,7 @@
 // if not dead hero inflictdamage(villaincounterdamage)
 
 // check for deaths..
-var Characters = [new Character("thor", "Thor", "assets/images/Thor.jpg", 500, 15, 25), new Character("iron-man", "Iron Man", "assets/images/Iron_Man.jpg", 600, 10, 30), new Character("thanos", "Thanos", "assets/images/Thanos.jpg", 800, 15, 200), new Character("loki", "Loki", "assets/images/Loki.png", 600, 15, 25),];
+var Characters = [new Character("thor", "Thor", "assets/images/Thor.jpg", 700, 20, 40), new Character("iron-man", "Iron Man", "assets/images/Iron_Man.jpg", 800, 15, 60), new Character("thanos", "Thanos", "assets/images/Thanos.jpg", 950, 10, 70), new Character("loki", "Loki", "assets/images/Loki.png", 700, 20, 30),];
 var heroCharacter;
 var villainCharacter;
 var gameOver = false;
@@ -28,7 +28,6 @@ $(document).ready(function () {
     $("#attack").on("click", function () {
         if (heroCharacter != null && villainCharacter != null) {
             attack();
-
         }
     });
 });
@@ -79,6 +78,7 @@ function attack() {
     if (heroCharacter == null || villainCharacter == null || gameOver) {
         return;
     }
+
     var enemy = $("#enemy");
     var vSelection = $("#villain-selection");
     var heroDamage = heroCharacter.calculateCurrentDamage();
